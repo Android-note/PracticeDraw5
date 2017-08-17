@@ -9,7 +9,6 @@ import android.util.AttributeSet;
 import android.widget.LinearLayout;
 
 public class Practice03OnDrawLayout extends LinearLayout {
-    Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     Pattern pattern = new Pattern();
 
     public Practice03OnDrawLayout(Context context) {
@@ -26,6 +25,7 @@ public class Practice03OnDrawLayout extends LinearLayout {
 
     {
         // 在这里插入 setWillNotDraw(false) 以启用完整的绘制流程
+        setWillNotDraw(false);
     }
 
     @Override
@@ -49,19 +49,19 @@ public class Practice03OnDrawLayout extends LinearLayout {
             spots[3] = new Practice03OnDrawLayout.Pattern.Spot(0.62f, 0.78f, 0.083f);
         }
 
-        private Pattern(Practice03OnDrawLayout.Pattern.Spot[] spots) {
-            this.spots = spots;
-        }
-
         {
             patternPaint.setColor(Color.parseColor("#A0E91E63"));
         }
 
         private void draw(Canvas canvas) {
+            //向上取整
             int repitition = (int) Math.ceil((float) getWidth() / getHeight());
             for (int i = 0; i < spots.length * repitition; i++) {
                 Practice03OnDrawLayout.Pattern.Spot spot = spots[i % spots.length];
-                canvas.drawCircle(i / spots.length * getHeight() * PATTERN_RATIO + spot.relativeX * getHeight(), spot.relativeY * getHeight(), spot.relativeSize * getHeight(), patternPaint);
+                canvas.drawCircle(i / spots.length * getHeight() * PATTERN_RATIO
+                                + spot.relativeX * getHeight(),
+                        spot.relativeY * getHeight(), spot.relativeSize * getHeight(),
+                        patternPaint);
             }
         }
 
