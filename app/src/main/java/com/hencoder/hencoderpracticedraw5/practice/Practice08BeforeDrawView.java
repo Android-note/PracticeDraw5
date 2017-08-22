@@ -31,5 +31,6 @@ public class Practice08BeforeDrawView extends AppCompatEditText {
 
         canvas.drawColor(ContextCompat.getColor(getContext(), R.color.green)); // 涂上绿色
         super.draw(canvas);
+
     }
 }
